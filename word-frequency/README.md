@@ -2,7 +2,7 @@
 
 This program downloads a text file from Project Gutenberg and prints the top 10th to 20th words (inclusive) by frequency.
 
-<!-- TODO: Add demo video -->
+https://github.com/ckcherry23/aisg-assessment/assets/68203159/726048c0-fd77-4c71-a46f-a4134d534664
 
 ## Requirements
 
