@@ -2,7 +2,7 @@
 
 This program uses the Hugging Face Inference API with GPT-2 for text generation.
 
-<!-- TODO: Add demo video -->
+https://github.com/ckcherry23/aisg-assessment/assets/68203159/7bbe3b96-b329-4da3-9257-6a999970952d
 
 ## Requirements
 
