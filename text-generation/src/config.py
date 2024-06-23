@@ -18,7 +18,7 @@ class Config:
 
         Args:
             config_file (str, optional): Path to the configuration YAML file. Defaults to "config.yaml".
-        
+
         Raises:
             Exception: If the Hugging Face API token is not set in the environment or if the config file is not found.
         """
