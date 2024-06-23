@@ -1,4 +1,7 @@
-def ordinal(n) -> str:
+"""Module containing utility functions."""
+
+
+def ordinal(n: int) -> str:
     """
     Convert an integer into its ordinal representation.
 
