@@ -1,6 +1,6 @@
 # AI Singapore Technical Assessment
 
-<!-- TODO: Add CI status -->
+![Pylint workflow](https://github.com/ckcherry23/aisg-assessment/actions/workflows/pylint.yml/badge.svg)
 
 This repository contains the code for the technical assessment for AI Singapore.
 
