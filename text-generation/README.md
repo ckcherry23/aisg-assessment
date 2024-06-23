@@ -1,6 +1,6 @@
 # Text Generation 
 
-This project uses the Hugging Face Inference API with GPT-2 for text generation.
+This program uses the Hugging Face Inference API with GPT-2 for text generation.
 
 <!-- TODO: Add demo video -->
 
@@ -41,14 +41,14 @@ This project uses the Hugging Face Inference API with GPT-2 for text generation.
 
 ## Usage
 
-The program will prompt you to enter an input text and generate text based on the input. 
+The program will prompt you to enter an input text and output generated text based on the input using text completion.
 
 ## Configuration
 
-You can configure the Hugging Face model and API settings in the `config.yaml` file. The following configuration options are available:
+You can configure the Hugging Face model and API settings in the `config.yaml` file. The default configuration file can be accessed [here](config.yaml). The following configuration options are available: 
 
-| Key | Description | Type | Required | Default Value | 
-| --- | ----------- | -----| -------- | ------------- |
+| Key | Description | Type | Required | Default Value |
+| --- | ----------- | ---- | -------- | ------------- |
 | `hugging_face.base_url` | Base URL for the Hugging Face API (without trailing slash) | String | Yes | - |
 | `hugging_face.model_id` | Model ID for the Hugging Face model | String | Yes | - |
 | `hugging_face.parameters.max_new_tokens` | Maximum number of tokens to generate | Int | No | 50 |
