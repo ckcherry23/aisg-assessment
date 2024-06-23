@@ -4,7 +4,22 @@ from src.utils import ordinal
 
 
 def main():
-    # Configuration
+    """
+    Main function to download a text file, process the text, and print the top words by frequency.
+
+    This function:
+    1. Downloads a text file from a given URL.
+    2. Cleans the text by removing punctuation and converting it to lower case.
+    3. Computes the frequency of each word in the cleaned text.
+    4. Retrieves the top words ranked by frequency within a specified range.
+    5. Prints the retrieved words and their counts.
+
+    Configurable parameters:
+    - `src_url` (str): The URL of the text file to download.
+    - `start_rank` (int): The starting rank of the words to be retrieved.
+    - `end_rank` (int): The ending rank of the words to be retrieved.
+    """
+    # Configurable parameters
     src_url = "https://www.gutenberg.org/cache/epub/16317/pg16317.txt"
     start_rank = 10
     end_rank = 20
