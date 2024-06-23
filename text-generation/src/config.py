@@ -1,7 +1,9 @@
+"""Module to load environment variables and constants from a configuration file."""
+
 import os
 from typing import Any, Dict, List, Tuple
 import yaml
-import pydash
+import pydash  # type: ignore
 from dotenv import load_dotenv
 
 
@@ -9,18 +11,21 @@ class Config:
     """Configuration class to load environment variables and constants.
 
     Attributes:
-        hugging_face_api_token (str): API token for Hugging Face API loaded from environment variables.
+        hugging_face_api_token (str): API token for Hugging Face API loaded from environment
+                                      variables.
         config_data (dict): Parsed configuration data from the YAML config file.
     """
 
-    def __init__(self, config_file="config.yaml") -> None:
+    def __init__(self, config_file: str = "config.yaml") -> None:
         """Initialize Config instance.
 
         Args:
-            config_file (str, optional): Path to the configuration YAML file. Defaults to "config.yaml".
+            config_file (str, optional): Path to the configuration YAML file. Defaults to
+                                         "config.yaml".
 
         Raises:
-            Exception: If the Hugging Face API token is not set in the environment or if the config file is not found.
+            Exception: If the Hugging Face API token is not set in the environment or if the
+                       config file is not found.
         """
         self._load_env_vars()
         self._load_config_file(config_file)
@@ -29,31 +34,34 @@ class Config:
         """Load environment variables, including the Hugging Face API token.
 
         Raises:
-            Exception: If the Hugging Face API token is not set in the environment.
+            KeyError: If the Hugging Face API token is not set in the environment.
         """
         load_dotenv()
-        self.hugging_face_api_token = os.getenv("HUGGING_FACE_API_TOKEN")
+        env_api_token = os.getenv("HUGGING_FACE_API_TOKEN")
 
-        if not self.hugging_face_api_token:
-            raise Exception("Hugging Face API token is not set in the environment")
+        if not env_api_token:
+            raise KeyError("Hugging Face API token is not set in the environment")
 
-    def _load_config_file(self, config_file) -> None:
+        self.hugging_face_api_token: str = env_api_token
+
+    def _load_config_file(self, config_file: str) -> None:
         """Load constants from the specified config file.
 
         Args:
             config_file (str): Path to the configuration YAML file.
 
         Raises:
-            Exception: If the config file is not found or if there is an error loading the YAML content.
+            FileNotFoundError: If the config file is not found or if there is an error loading the
+                               YAML content.
         """
         if not os.path.exists(config_file):
-            raise Exception(f"Config file not found at {config_file}")
+            raise FileNotFoundError(f"Config file not found at {config_file}")
 
-        with open(config_file, "r") as file:
+        with open(config_file, "r", encoding="utf-8") as file:
             try:
                 config_data = yaml.safe_load(file)
             except yaml.YAMLError as exc:
-                raise Exception(f"Error loading config file: {exc}")
+                raise yaml.YAMLError(f"Error loading config file: {exc}")
 
         self.config_data = config_data
 
@@ -71,8 +79,8 @@ class Config:
         """Get the retry parameters for API requests.
 
         Returns:
-            tuple: A tuple containing maximum retries (int), status codes to force retry (list of int),
-                   and backoff factor (float).
+            tuple: A tuple containing maximum retries (int), status codes to force retry
+                   (list of int), and backoff factor (float).
         """
         max_retries = self._get_config_value("api_client.retry.max_retries", default=3)
         status_forcelist = self._get_config_value(
@@ -110,7 +118,8 @@ class Config:
 
         Args:
             key (str): Key in dot notation (e.g., "hugging_face.base_url") to retrieve the value.
-            default (Any, optional): Default value to return if the key is not found. Defaults to None.
+                       default (Any, optional): Default value to return if the key is not found.
+                       Defaults to None.
 
         Raises:
             KeyError: If the key is not found in the config file.
@@ -118,7 +127,7 @@ class Config:
         Returns:
             Any: Value associated with the specified key.
         """
-        value = pydash.get(self.config_data, key, default)
+        value: Any = pydash.get(self.config_data, key, default)  # type: ignore
         if value is None:
             raise KeyError(f"Key value not found in config file: {key}")
         return value

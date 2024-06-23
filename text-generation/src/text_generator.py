@@ -1,4 +1,9 @@
-class TextGenerator:
+"""Module to handle text generation using Hugging Face API."""
+
+from src.api_client import APIClient
+
+
+class TextGenerator:  # pylint: disable=too-few-public-methods
     """Class to handle text generation using Hugging Face API.
 
     Attributes:
@@ -6,7 +11,7 @@ class TextGenerator:
         config (:obj:`Config`): Configuration object containing API and model parameters.
     """
 
-    def __init__(self, api_client) -> None:
+    def __init__(self, api_client: APIClient) -> None:
         """Initialize TextGenerator instance.
 
         Args:
@@ -15,7 +20,7 @@ class TextGenerator:
         self.api_client = api_client
         self.config = api_client.config
 
-    def generate_text(self, prompt) -> str:
+    def generate_text(self, prompt: str) -> str:
         """
         Generates text continuation using the Hugging Face Inference API.
 
@@ -41,5 +46,5 @@ class TextGenerator:
         }
 
         response_json = self.api_client.post(url, headers, payload)
-        generated_text = response_json[0]["generated_text"]
+        generated_text = response_json[0]["generated_text"]  # type: ignore
         return generated_text

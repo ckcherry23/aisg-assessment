@@ -1,8 +1,11 @@
+"""Module to handle API requests with retry logic."""
+
 from typing import Any, Dict
 from requests import Session
 from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+from urllib3.util.retry import Retry  # type: ignore
 from src.config import Config
+from src.exceptions.api_request_exception import APIRequestException
 
 
 class APIClient:
@@ -13,12 +16,13 @@ class APIClient:
         session (:obj:`Session`): HTTP session object initialized with retry strategy.
     """
 
-    def __init__(self, config=None) -> None:
+    def __init__(self, config: Config | None = None) -> None:
         """Initializes an instance of APIClient.
 
         Args:
             config (:obj:`Config`, optional): Configuration object. Defaults to None,
-                in which case a default configuration (`Config()`) is used.
+                                              in which case a default configuration
+                                              (`Config()`) is used.
         """
         self.config = config or Config()
         self.session = self._init_session()
@@ -38,13 +42,13 @@ class APIClient:
         retry_strategy = Retry(
             total=max_retries,
             status_forcelist=status_forcelist,
-            backoff_factor=backoff_factor,
+            backoff_factor=backoff_factor,  # type: ignore
         )
         adapter = HTTPAdapter(max_retries=retry_strategy)
         session.mount("https://", adapter)
         return session
 
-    def get_api_url(self, base_url, path) -> str:
+    def get_api_url(self, base_url: str, path: str) -> str:
         """Constructs the full API URL.
 
         Args:
@@ -56,7 +60,7 @@ class APIClient:
         """
         return f"{base_url}/{path}"
 
-    def get_headers(self, token) -> Dict[str, str]:
+    def get_headers(self, token: str) -> Dict[str, str]:
         """Constructs headers for API requests.
 
         Args:
@@ -67,7 +71,9 @@ class APIClient:
         """
         return {"Authorization": f"Bearer {token}"}
 
-    def post(self, url, headers, payload) -> Dict[str, Any]:
+    def post(
+        self, url: str, headers: Dict[str, str], payload: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Sends a POST request with retry logic.
 
         Args:
@@ -79,12 +85,12 @@ class APIClient:
             dict: JSON response from the API.
 
         Raises:
-            Exception: If the API request fails with a non-200 status code.
+            APIRequestException: If the API request fails with a non-200 status code.
         """
         response = self.session.post(url, headers=headers, json=payload)
-        if response.status_code == 200:
+        if response.status_code == 200:  # pylint: disable=no-else-return
             return response.json()
         else:
-            raise Exception(
+            raise APIRequestException(
                 f"API request failed with status code {response.status_code}: {response.text}"
             )
