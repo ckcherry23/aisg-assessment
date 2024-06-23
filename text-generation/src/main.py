@@ -1,3 +1,5 @@
+"""Main module to demonstrate text generation based on user input."""
+
 from src.text_generator import TextGenerator
 from src.config import Config
 from src.api_client import APIClient

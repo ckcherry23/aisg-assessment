@@ -1,11 +1,13 @@
+"""Module to handle downloading of text files."""
+
 import urllib.request
 
 
-class Downloader:
+class Downloader:  # pylint: disable=too-few-public-methods
     """Class to handle downloading of text files."""
 
     @staticmethod
-    def download_text_file(url) -> str:
+    def download_text_file(url: str) -> str:
         """Download the text file from the specified URL.
 
         Args:
