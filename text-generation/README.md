@@ -55,5 +55,5 @@ You can configure the Hugging Face model and API settings in the `config.yaml` f
 | `hugging_face.parameters.num_return_sequences` | Number of sequences to generate | Int | No | 1 |
 | `hugging_face.parameters.temperature` | Sampling temperature for the model | Float | No | 0.8 |
 | `api_client.retry.max_retries` | Maximum number of retries for API requests | Int | No | 3 |
-| `api_client.retry.status_forcelist` | List of HTTP status codes to retry | List<Int> | No | [500, 502, 503, 504] |
+| `api_client.retry.status_forcelist` | List of HTTP status codes to retry | List[Int] | No | [500, 502, 503, 504] |
 | `api_client.retry.backoff_factor` | Backoff factor for exponential backoff | Float | No | 0.5 |
