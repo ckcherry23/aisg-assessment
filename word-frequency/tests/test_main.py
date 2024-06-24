@@ -1,3 +1,5 @@
+"""Module for testing the main function."""
+
 import unittest
 from io import StringIO
 from unittest.mock import patch
@@ -5,8 +7,11 @@ from src.main import main
 
 
 class TestMain(unittest.TestCase):
+    """Class to test the main function."""
+
     @patch("sys.stdout", new_callable=StringIO)
     def test_main_output(self, mock_stdout: StringIO):
+        """Test the output of the main function."""
         main()
         output = mock_stdout.getvalue()
         expected = """Words ranked from 10th to 20th by frequency:

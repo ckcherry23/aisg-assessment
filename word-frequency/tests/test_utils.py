@@ -1,10 +1,14 @@
+"""Module for testing the utility functions in the src.utils module."""
+
 import unittest
 from src.utils import ordinal
 
 
 class TestUtils(unittest.TestCase):
+    """Class to test the utility functions."""
 
     def test_ordinal(self):
+        """Test the ordinal function."""
         self.assertEqual(ordinal(1), "1st")
         self.assertEqual(ordinal(2), "2nd")
         self.assertEqual(ordinal(3), "3rd")
