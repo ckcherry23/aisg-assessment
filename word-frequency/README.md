@@ -38,3 +38,10 @@ https://github.com/ckcherry23/aisg-assessment/assets/68203159/726048c0-fd77-4c71
 ## Configuration
 
 The URL of the text file, the start and end indices of the words to print, and the number of words to print can be configured with the `src/main.py` file as constants.
+
+## Testing
+
+To run the tests, use the following command:
+```sh
+python3 -m unittest
+```
