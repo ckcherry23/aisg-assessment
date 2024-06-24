@@ -1,3 +1,5 @@
+"""Module to test the config module."""
+
 from typing import Any
 import unittest
 from unittest.mock import patch, mock_open
@@ -6,6 +8,7 @@ from src.config import Config
 
 
 class TestConfig(unittest.TestCase):
+    """Class to test the Config class."""
 
     @patch.dict(os.environ, {"HUGGING_FACE_API_TOKEN": "test_token"})
     @patch(
@@ -27,7 +30,10 @@ api_client:
 """,
     )
     @patch("os.path.exists", return_value=True)
-    def test_config_loading(self, mock_exists: bool, mock_file: Any):
+    def test_config_loading(
+        self, mock_exists: bool, mock_file: Any
+    ):  # pylint: disable=unused-argument
+        """Test the loading of the configuration file and environment variables."""
         config = Config(config_file="dummy.yaml")
         self.assertEqual(config.hugging_face_api_token, "test_token")
         self.assertEqual(

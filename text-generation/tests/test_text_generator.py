@@ -1,3 +1,5 @@
+"""Module to test the text_generator module."""
+
 import unittest
 from unittest.mock import MagicMock
 from src.text_generator import TextGenerator
@@ -6,7 +8,10 @@ from src.config import Config
 
 
 class TestTextGenerator(unittest.TestCase):
+    """Class to test the TextGenerator class."""
+
     def setUp(self):
+        """Initializes the mock config and mock API client objects."""
         self.mock_config = MagicMock(Config)
         self.mock_config.get_hugging_face_api_details.return_value = (
             "base_url",
@@ -19,6 +24,7 @@ class TestTextGenerator(unittest.TestCase):
         self.text_generator = TextGenerator(api_client=self.mock_api_client)
 
     def test_generate_text(self):
+        """Test the generate_text method."""
         prompt = "Once upon a time"
         mock_response = [{"generated_text": "Once upon a time, there was a..."}]
 

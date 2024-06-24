@@ -1,3 +1,5 @@
+"""Module to test the api_client module."""
+
 import unittest
 from unittest.mock import patch, MagicMock
 from src.api_client import APIClient
@@ -6,7 +8,10 @@ from src.exceptions.api_request_exception import APIRequestException
 
 
 class TestAPIClient(unittest.TestCase):
+    """Class to test the APIClient class."""
+
     def setUp(self):
+        """Initializes the mock config and APIClient object."""
         self.mock_config = MagicMock(Config)
         self.mock_config.hugging_face_api_token = "mock-token"
         self.mock_config.get_api_retry_params.return_value = (
@@ -18,6 +23,7 @@ class TestAPIClient(unittest.TestCase):
 
     @patch("requests.Session.post")
     def test_post_success(self, mock_post: MagicMock):
+        """Test the post method with a successful 200 response."""
         url = "https://mock-url.com"
         headers = {"Authorization": "Bearer mock-token"}
         payload = {"inputs": "Once upon a time", "parameters": "mock-parameters"}
@@ -32,6 +38,7 @@ class TestAPIClient(unittest.TestCase):
 
     @patch("requests.Session.post")
     def test_post_failure(self, mock_post: MagicMock):
+        """Test the post method with a failed 400 response."""
         url = "https://mock-url.com"
         headers = {"Authorization": "Bearer mock-token"}
         payload = {"inputs": "Once upon a time", "parameters": "mock-parameters"}
@@ -45,6 +52,7 @@ class TestAPIClient(unittest.TestCase):
             self.api_client.post(url, headers, payload)
 
     def test_get_api_url(self):
+        """Test the get_api_url method."""
         base_url = "https://mock-url.com"
         path = "mock-path"
 
@@ -52,6 +60,7 @@ class TestAPIClient(unittest.TestCase):
         self.assertEqual(url, "https://mock-url.com/mock-path")
 
     def test_get_headers(self):
+        """Test the get_headers method."""
         headers = self.api_client.get_headers("mock-token")
         self.assertEqual(headers, {"Authorization": "Bearer mock-token"})
 

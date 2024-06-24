@@ -1,10 +1,13 @@
+"""Main module test cases."""
+
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 from src.main import main
-from unittest.mock import MagicMock
 
 
 class TestMain(unittest.TestCase):
+    """Class to test the main module."""
+
     @patch("builtins.input", return_value="Life is a box of")
     @patch("builtins.print")
     @patch(
@@ -17,8 +20,9 @@ ones.""",
         self,
         mock_generate_text: MagicMock,
         mock_print: MagicMock,
-        mock_input: MagicMock,
+        mock_input: MagicMock,  # pylint: disable=unused-argument
     ):
+        """Test the main function with mocks."""
 
         main()
 
