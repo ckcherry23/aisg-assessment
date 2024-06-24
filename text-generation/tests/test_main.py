@@ -2,12 +2,14 @@
 
 import unittest
 from unittest.mock import patch, MagicMock
+import os
 from src.main import main
 
 
 class TestMain(unittest.TestCase):
     """Class to test the main module."""
 
+    @patch.dict(os.environ, {"HUGGING_FACE_API_TOKEN": "test_token"})
     @patch("builtins.input", return_value="Life is a box of")
     @patch("builtins.print")
     @patch(
