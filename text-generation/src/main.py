@@ -25,7 +25,7 @@ def main():
 
     input_prompt = input("Enter the prompt input: ")
     generated_text = text_generator.generate_text(input_prompt)
-    print(f"Generated Text: {generated_text}")
+    print(f"Generated Text: {generated_text}", flush=True)
 
 
 if __name__ == "__main__":

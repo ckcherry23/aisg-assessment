@@ -1,9 +1,9 @@
-name: Pylint
+name: Tests
 
 on: [push]
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -17,11 +17,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analyse the code with pylint
+    - name: Run tests
       run: |
         cd word-frequency
-        pylint $(git ls-files '*.py')
+        python -m unittest
         cd ../text-generation
         pip install -r requirements.txt
-        pylint $(git ls-files '*.py')
+        python -m unittest

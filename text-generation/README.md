@@ -57,3 +57,10 @@ You can configure the Hugging Face model and API settings in the `config.yaml` f
 | `api_client.retry.max_retries` | Maximum number of retries for API requests | Int | No | 3 |
 | `api_client.retry.status_forcelist` | List of HTTP status codes to retry | List[Int] | No | [500, 502, 503, 504] |
 | `api_client.retry.backoff_factor` | Backoff factor for exponential backoff | Float | No | 0.5 |
+
+## Testing
+
+To run the tests, use the following command:
+```sh
+python3 -m unittest
+```

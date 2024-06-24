@@ -1,5 +1,6 @@
 """Module for APIRequestException."""
 
+
 class APIRequestException(Exception):
     """Exception raised for API request failures."""
 
